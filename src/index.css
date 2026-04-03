@@ -1,0 +1,26 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@media print {
+  @page {
+    size: 25cm 7cm;
+    margin: 0mm;
+  }
+
+  html,
+  body {
+    width: 25cm;
+    height: 7cm;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: hidden !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  #root {
+    width: 25cm;
+    height: 7cm;
+  }
+}
