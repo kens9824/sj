@@ -6,8 +6,9 @@ import SlipForm from './components/SlipForm'
 import FormList from './components/FormList'
 import MeasurementList from './components/MeasurementList'
 import Dashboard from './components/Dashboard'
-import { fetchSlipData } from './api/slipApi'
+import { fetchSlipData, triggerFetchData } from './api/slipApi'
 import { io } from 'socket.io-client'
+import { toast, Toaster } from 'react-hot-toast'
 import {
   Printer,
   ClipboardList,
@@ -109,6 +110,7 @@ function SlipPages() {
 }
 
 function App() {
+  const [fetching, setFetching] = useState(false)
   const [darkMode, setDarkMode] = useState(() => {
     const saved = localStorage.getItem('darkMode')
     return saved === 'true' || (!saved && window.matchMedia('(prefers-color-scheme: dark)').matches)
@@ -148,8 +150,27 @@ function App() {
                     <Activity size={18} />
                     Measurements
                   </Link>
+                  <button 
+                    onClick={async () => {
+                      setFetching(true)
+                      try {
+                        const res = await triggerFetchData()
+                        toast.success(res.message || 'Data fetched successfully!')
+                      } catch (err) {
+                        toast.error(err.message)
+                      } finally {
+                        setFetching(false)
+                      }
+                    }}
+                    disabled={fetching}
+                    className="text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 px-3 py-2 rounded-md text-sm font-semibold transition-all flex items-center gap-2 disabled:opacity-50"
+                  >
+                    <RefreshCw size={18} className={fetching ? 'animate-spin' : ''} />
+                    {fetching ? 'Fetching...' : 'Fetch'}
+                  </button>
                 </div>
 
+                <Toaster position="top-right" />
                 <button
                   onClick={() => setDarkMode(!darkMode)}
                   className="p-2 rounded-xl bg-gray-50 dark:bg-[#334155] text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-[#475569] transition-all border border-gray-200 dark:border-[#475569] shadow-sm flex items-center justify-center group"
