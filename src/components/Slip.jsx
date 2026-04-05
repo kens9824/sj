@@ -26,15 +26,10 @@ export const Slip = React.forwardRef(({ data }, ref) => {
             </div>
 
             {/* Diagram Section */}
-            <div className="w-[4cm] h-full flex flex-col items-center justify-center border-r border-gray-400 pr-2 mr-2">
+            <div className="w-[8cm] h-full flex flex-col items-center justify-center border-r border-gray-400 pr-2 mr-2">
                 <div className="relative w-full h-full flex items-center justify-center pt-2">
                     {data.diagramImage && <img src={data.diagramImage} alt="Diagram" className="h-[90%] w-auto object-contain" />}
                 </div>
-            </div>
-
-            {/* QR Code Section */}
-            <div className="w-[3.5cm] h-full flex items-center justify-center border-r border-gray-400 pr-2 mr-2">
-                <QRCodeCanvas value={JSON.stringify((({ diagramImage, ...rest }) => rest)(data))} size={110} />
             </div>
 
             {/* Table Section */}
