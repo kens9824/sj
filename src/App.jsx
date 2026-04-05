@@ -98,7 +98,7 @@ function SlipPages() {
         </p>
       </div>
 
-      <div className="overflow-auto max-w-full p-4 bg-gray-200 dark:bg-[#0f172a] rounded-lg shadow-inner border border-gray-300 dark:border-[#334155]">
+      <div className="overflow-auto max-w-full p-1 bg-gray-200 dark:bg-[#0f172a] rounded-lg shadow-inner border border-gray-300 dark:border-[#334155]">
         <div className="shadow-2xl rounded-lg overflow-hidden">
           {loading && <p className="text-center p-8 text-gray-500 dark:text-gray-400">Loading slip data...</p>}
           {error && <p className="text-center p-8 text-red-500">Error: {error}</p>}
