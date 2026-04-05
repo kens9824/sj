@@ -20,7 +20,7 @@ export const Slip = React.forwardRef(({ data }, ref) => {
     const fontSizePx = Math.max(7, Math.min(9, rowHeightPx * 0.45));
 
     return (
-        <div ref={ref} className="w-[22.5cm] h-[7.2cm] bg-white text-black flex text-[9px] leading-tight font-sans overflow-hidden box-border p-0 print:border-none print:w-[25.5cm] print:h-[7.2cm] print:overflow-hidden dark:shadow-[0_0_20px_rgba(0,100,255,0.15)] transition-shadow">
+        <div ref={ref} className="w-[23cm] h-[7.2cm] bg-white text-black flex text-[9px] leading-tight font-sans overflow-hidden box-border p-2 border border-gray-300 dark:border-gray-600 print:border-none print:w-[24.5cm] print:h-[7.2cm] print:overflow-hidden print:p-4 print:m-0 dark:shadow-[0_0_20px_rgba(0,100,255,0.15)] transition-shadow">
             {/* Left Metadata Section - Rotated Text */}
             <div className="w-[1cm] h-full relative border-r border-gray-400 flex-shrink-0 bg-gray-50/50 self-stretch">
                 <div
