@@ -17,10 +17,10 @@ export const Slip = React.forwardRef(({ data }, ref) => {
     // Dynamic sizing to fill space
     const rowsInView = Math.min(data.measurements.length, maxRowsPerTable);
     const rowHeightPx = Math.floor(255 / (rowsInView + 1)); 
-    const fontSizePx = Math.max(7, Math.min(9, rowHeightPx * 0.45));
+    const fontSizePx = Math.max(9, Math.min(11, rowHeightPx * 0.45));
 
     return (
-        <div ref={ref} className="w-[23cm] h-[7.2cm] bg-white text-black flex text-[9px] leading-tight font-sans overflow-hidden box-border p-2 border border-gray-300 dark:border-gray-600 print:border-none print:w-[24.5cm] print:h-[7.2cm] print:overflow-hidden print:p-4 print:m-0 dark:shadow-[0_0_20px_rgba(0,100,255,0.15)] transition-shadow">
+        <div ref={ref} className="w-[23cm] h-[8.2cm] bg-white text-black flex text-[10px] leading-tight font-sans overflow-hidden box-border p-1 border border-gray-300 dark:border-gray-600 print:border-none print:w-[24.5cm] print:h-[7.2cm] print:overflow-hidden print: dark:shadow-[0_0_20px_rgba(0,100,255,0.15)] transition-shadow">
             {/* Left Metadata Section - Rotated Text */}
             <div className="w-[1cm] h-full relative border-r border-gray-400 flex-shrink-0 bg-gray-50/50 self-stretch">
                 <div
@@ -62,7 +62,7 @@ export const Slip = React.forwardRef(({ data }, ref) => {
                                     <td className="border border-gray-400 px-0.5 whitespace-nowrap">{row.spec}</td>
                                     <td className="border border-gray-400 px-0.5">{row.actual}</td>
                                     <td className="border border-gray-400 px-0.5">{row.diff}</td>
-                                    <td className={`border border-gray-400 px-0.5 ${row.status === 'NG' ? 'text-red-600 font-bold' : 'text-green-600'}`}>{row.status}</td>
+                                    <td className={`border border-gray-400 px-0.5 ${row.status === 'NG' ? 'text-red-600 font-bold' : 'text-black-600'}`}>{row.status}</td>
                                 </tr>
                             ))}
                         </tbody>
