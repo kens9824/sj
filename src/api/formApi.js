@@ -55,3 +55,31 @@ export const updateForm = async (id, formData) => {
     }
     return res.json();
 };
+
+/**
+ * Delete a measurement entry
+ */
+export const deleteMeasurement = async (id) => {
+    const res = await fetch(`${API_BASE_URL}/measurements/${id}`, {
+        method: 'DELETE',
+    });
+    if (!res.ok) {
+        const err = await res.json();
+        throw new Error(err.error || 'Failed to delete measurement');
+    }
+    return res.json();
+};
+
+/**
+ * Delete a form and all associated data
+ */
+export const deleteForm = async (id) => {
+    const res = await fetch(`${API_BASE_URL}/forms/${id}`, {
+        method: 'DELETE',
+    });
+    if (!res.ok) {
+        const err = await res.json();
+        throw new Error(err.error || 'Failed to delete form');
+    }
+    return res.json();
+};

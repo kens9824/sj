@@ -110,6 +110,7 @@ function SlipPages() {
 }
 
 function App() {
+  const [fetching, setFetching] = useState(false)
   const [darkMode, setDarkMode] = useState(() => {
     const saved = localStorage.getItem('darkMode')
     return saved === 'true' || (!saved && window.matchMedia('(prefers-color-scheme: dark)').matches)
@@ -149,6 +150,25 @@ function App() {
                     <Activity size={18} />
                     Measurements
                   </Link>
+
+                  <button
+                    onClick={async () => {
+                      setFetching(true)
+                      try {
+                        const res = await triggerFetchData()
+                        toast.success(res.message || 'Data fetched successfully!')
+                      } catch (err) {
+                        toast.error(err.message)
+                      } finally {
+                        setFetching(false)
+                      }
+                    }}
+                    disabled={fetching}
+                    className="text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 px-3 py-2 rounded-md text-sm font-semibold transition-all flex items-center gap-2 disabled:opacity-50"
+                  >
+                    <RefreshCw size={18} className={fetching ? 'animate-spin' : ''} />
+                    {fetching ? 'Fetching...' : 'Fetch'}
+                  </button>
                 </div>
 
                 <Toaster position="top-right" />

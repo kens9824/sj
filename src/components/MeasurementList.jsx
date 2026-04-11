@@ -1,5 +1,4 @@
 import { useState, useEffect, useRef } from 'react';
-import { getAllMeasurements } from '../api/formApi';
 import { useNavigate } from 'react-router-dom';
 import {
     FileSpreadsheet,
@@ -12,8 +11,11 @@ import {
     CheckCircle2,
     XCircle,
     X,
-    HelpCircle
+    HelpCircle,
+    Trash2
 } from 'lucide-react';
+import { deleteMeasurement, getAllMeasurements } from '../api/formApi';
+import { toast } from 'react-hot-toast';
 import { formatDateTime, formatDate, getDateRangePreset } from '../utils/dateUtils';
 
 export default function MeasurementList() {
@@ -61,6 +63,18 @@ export default function MeasurementList() {
             setError(err.message);
         } finally {
             setLoading(false);
+        }
+    };
+
+    const handleDelete = async (id) => {
+        if (!window.confirm('Are you sure you want to delete this measurement and its CSV file?')) return;
+
+        try {
+            await deleteMeasurement(id);
+            toast.success('Measurement deleted successfully');
+            fetchMeasurements(pagination.page);
+        } catch (err) {
+            toast.error(err.message);
         }
     };
 
@@ -289,13 +303,22 @@ export default function MeasurementList() {
                                         {formatDateTime(m.measurement_datetime)}
                                     </td>
                                     <td className="px-6 py-4 text-center">
-                                        <button
-                                            onClick={() => navigate(`/?id=${m.id}`)}
-                                            className="p-2 text-blue-600 dark:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900/20 rounded-full inline-flex items-center transition-all"
-                                            title="View Slip"
-                                        >
-                                            <Eye size={18} />
-                                        </button>
+                                        <div className="flex items-center justify-center gap-2">
+                                            <button
+                                                onClick={() => navigate(`/?id=${m.id}`)}
+                                                className="p-2 text-blue-600 dark:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900/20 rounded-full inline-flex items-center transition-all"
+                                                title="View Slip"
+                                            >
+                                                <Eye size={18} />
+                                            </button>
+                                            <button
+                                                onClick={() => handleDelete(m.id)}
+                                                className="p-2 text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-full inline-flex items-center transition-all"
+                                                title="Delete Measurement"
+                                            >
+                                                <Trash2 size={18} />
+                                            </button>
+                                        </div>
                                     </td>
                                 </tr>
                             ))
