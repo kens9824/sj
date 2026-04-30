@@ -300,7 +300,7 @@ export default function MeasurementList() {
                                         </span>
                                     </td>
                                     <td className="px-6 py-4 text-sm text-gray-500 dark:text-gray-500 text-center">
-                                        {formatDateTime(m.measurement_datetime)}
+                                        {formatDateTime(m.created_at)}
                                     </td>
                                     <td className="px-6 py-4 text-center">
                                         <div className="flex items-center justify-center gap-2">
