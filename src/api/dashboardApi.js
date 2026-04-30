@@ -1,4 +1,6 @@
-const API_URL = 'http://localhost:5000/api/dashboard';
+import BASE_URL from './apiConfig';
+  
+const API_URL = `${BASE_URL}/dashboard`;
 
 export const fetchDashboardStats = async () => {
   const response = await fetch(`${API_URL}/stats`);
